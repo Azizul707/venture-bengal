@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+.hadingFont{
+    font-family: 'Abril Fatface', serif;
+}
+.orangeColor{
+    color: #FE5C24;
+}
