@@ -3,6 +3,7 @@ import 'react-tabs/style/react-tabs.css';
 import Reviews from '../../components/navBar/Reviews';
 import OverView from '../../components/OverView';
 import TourPackages from './tourPackages';
+import Guides from './Guides';
 const Home = () => {
     return (
         <div>
@@ -33,7 +34,7 @@ const Home = () => {
                             <TourPackages/>
                         </TabPanel>
                         <TabPanel>
-                            <h2>Any content 2</h2>
+                            <Guides/>
                         </TabPanel>
                     </Tabs>
                 </div>
