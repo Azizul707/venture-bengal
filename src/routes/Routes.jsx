@@ -5,6 +5,11 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import AllPackages from "../pages/Home/AllPackages";
 import PackagesDetails from "../pages/Home/PackagesDetails";
+import TourType from "../components/tourType/TourType";
+import Dashboard from "../Dashboard/Dashboard";
+import PrivateRoute from "../auth/Private/PrivateRoute";
+import Contact from "../pages/Contact";
+import Community from "../pages/community/Community";
 
 const Routes = createBrowserRouter( [
     {
@@ -24,14 +29,30 @@ const Routes = createBrowserRouter( [
                 element:<Register/>
             },
             {
+                path: 'contact',
+                element:<Contact/>
+            },
+            {
+                path: 'community',
+                element:<Community/>
+            },
+            {
                 path: 'all-packages',
-                element:<AllPackages/>
+                element:<PrivateRoute><AllPackages/></PrivateRoute>
             },
             {
                 path: 'package-details/:id',
-                element:<PackagesDetails/>
+                element:<PrivateRoute><PackagesDetails/></PrivateRoute>
+            },
+            {
+                path: 'tour-type/:type',
+                element:<PrivateRoute><TourType/></PrivateRoute>
             }
         ]
+    },
+    {
+        path: '/dashboard',
+        element:<Dashboard/>
     }
 ] )
 

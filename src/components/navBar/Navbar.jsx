@@ -36,9 +36,9 @@ const Navbar = () => {
                             <div className="">
                                 <ul className="hidden md:block md:flex justify-between gap-5">
                                     <li><NavLink to='/'>Home</NavLink></li>
-                                    <li><NavLink to='/'>Community</NavLink></li>
+                                    <li><NavLink to='/community'>Community</NavLink></li>
                                     <li><NavLink to='/'>Blog</NavLink></li>
-                                    <li><NavLink to='/'>Contact</NavLink></li>
+                                    <li><NavLink to='/contact'>Contact</NavLink></li>
                                 </ul>
                             </div>
                             {
@@ -56,6 +56,7 @@ const Navbar = () => {
                                             <div className="space-y-3">
                                                 <p>{ user.displayName }</p><hr />
                                                 <p>{ user.email }</p><hr />
+                                                <NavLink to='/dashboard'>Dashboard</NavLink> <hr />
                                                 <button onClick={handleSingout} className="flex  items-center gap-3 text-red-600">Logout<FaArrowRotateLeft />  </button>
                                             </div>
                                         </div>

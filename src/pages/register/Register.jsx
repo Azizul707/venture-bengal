@@ -2,14 +2,15 @@ import { FaGoogle } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import userAxiosSecure from "../../hooks/userAxiosSecure";
 
 
 
 const Register = () => {
-    const navigate = useNavigate();
-    const { createUser, updateUserProfile,singOut } = useAuth()
+    const { createUser, updateUserProfile,googleLogin } = useAuth()
 
     const handleCreateUser = ( e ) => {
+        const axiosSEcure = userAxiosSecure();
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -20,32 +21,49 @@ const Register = () => {
         
         createUser( email, password )
             .then( res => {
-            console.log(res.user);
+                console.log( res.user );
             } )
-            updateUserProfile( name, photoURL )
+        updateUserProfile( name, photoURL )
             .then( () => {
                 console.log( 'profile updated' );
                 
-                Swal.fire({
+                Swal.fire( {
                     position: "top-end",
                     icon: "success",
                     title: "Your Account Created Successfully",
                     showConfirmButton: false,
                     timer: 1500
                 } );
-                singOut()
-                    .then( () => {
-                    console.log('singout');
-                })
-                navigate('/login')
+
+                axiosSEcure.post( '/users', { email: email, name: name, photoURL: photoURL } )
+                    .then( res => {
+                        console.log( res );
+                    } )
+                    .catch( err => {
+                        console.log( err );
+                    } );
                 
             } )
-                .catch( err => {
-            console.log(err);
-        })
-        
-      
-    }
+            .catch( err => {
+                console.log( err );
+            } );
+    };
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then( res => {
+                Swal.fire( {
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                } );
+            } )
+            .catch( err => {
+                console.log( err );
+            } );
+    };
     
     return (
         <div className="md:my-32">
@@ -89,7 +107,7 @@ const Register = () => {
                                 </div>
 
                                 <div className="flex items-center justify-center text-white rounded gap-5 bg-[#FE5C24] hover:bg-blue-600 py-3 border mt-5">
-                                    <button className="">Login With</button>
+                                    <button onClick={handleGoogleLogin} className="">Login With</button>
                                     <span><FaGoogle></FaGoogle></span>
                                 </div>
                                 <div className="form-control mt-6">

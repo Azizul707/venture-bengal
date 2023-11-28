@@ -4,6 +4,8 @@ import Reviews from '../../components/navBar/Reviews';
 import OverView from '../../components/OverView';
 import TourPackages from './tourPackages';
 import Guides from './Guides';
+import TourType from '../../components/tourType/TourType';
+import TourTypeSlider from '../../components/tourType/TourTypeSlider';
 const Home = () => {
     return (
         <div>
@@ -39,6 +41,15 @@ const Home = () => {
                     </Tabs>
                 </div>
 
+            </section>
+            <section>
+            <div className="max-w-screen-2xl mx-auto">
+            <div className=" max-w-screen-xl mx-auto px-3 my-10 text-orange-600">
+                    <h2>Find Your Desire Tour By</h2>
+                    <h1 className='text-4xl font-bold'>Tour Type</h1>
+                </div>
+        </div>
+                <TourTypeSlider/>
             </section>
             <section className="bg-[#0C3E72]">
                 <div className="max-w-screen-xl mx-auto my-20 py-20 px-4">
