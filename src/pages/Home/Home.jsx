@@ -6,6 +6,7 @@ import TourPackages from './tourPackages';
 import Guides from './Guides';
 import TourType from '../../components/tourType/TourType';
 import TourTypeSlider from '../../components/tourType/TourTypeSlider';
+import StoryMenu from '../Story/StoryMenu';
 const Home = () => {
     return (
         <div>
@@ -33,30 +34,36 @@ const Home = () => {
                             <OverView></OverView>
                         </TabPanel>
                         <TabPanel>
-                            <TourPackages/>
+                            <TourPackages />
                         </TabPanel>
                         <TabPanel>
-                            <Guides/>
+                            <Guides />
                         </TabPanel>
                     </Tabs>
                 </div>
 
             </section>
             <section>
-            <div className="max-w-screen-2xl mx-auto">
-            <div className=" max-w-screen-xl mx-auto px-3 my-10 text-orange-600">
-                    <h2>Find Your Desire Tour By</h2>
-                    <h1 className='text-4xl font-bold'>Tour Type</h1>
+                <div className="max-w-screen-2xl mx-auto">
+                    <div className=" max-w-screen-xl mx-auto px-3 my-10 text-orange-600">
+                        <h2>Find Your Desire Tour By</h2>
+                        <h1 className='text-4xl font-bold'>Tour Type</h1>
+                    </div>
                 </div>
-        </div>
-                <TourTypeSlider/>
+                <TourTypeSlider />
+            </section>
+
+            <section className='max-w-screen-xl mx-auto'>
+                <h1 className='mt-10 text-4xl font-bold text-orange-600 border-b pb-2'><span className='text-lg font-normal'>Adventures Unveiled</span> <br /> Traveler Tales from Around the Globe</h1>
+                <StoryMenu />
             </section>
             <section className="bg-[#0C3E72]">
                 <div className="max-w-screen-xl mx-auto my-20 py-20 px-4">
                     <h1 className='text-slate-100 text-4xl font-semibold'>What Our Tourist Say</h1>
-                <Reviews></Reviews>
+                    <Reviews></Reviews>
                 </div>
             </section>
+
         </div>
     );
 };

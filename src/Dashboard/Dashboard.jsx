@@ -6,7 +6,6 @@ const Dashboard = () => {
         <div>
             <Navbar></Navbar>
             <Outlet></Outlet>
-            
         </div>
     );
 };

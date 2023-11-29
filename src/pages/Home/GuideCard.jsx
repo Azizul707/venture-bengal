@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
+
+import { Link } from "react-router-dom";
 
 const GuideCard = ( { item } ) => {
-    const{photo,name,experience,languages,specialties} = item
+    const{photo,name,experience,languages,specialties,_id} = item
     return (
         <div>
             <div className="card w-96  shadow-xl">
@@ -12,14 +15,16 @@ const GuideCard = ( { item } ) => {
                     <p>{ experience }</p>
                     <p className="font-bold">Languages:</p>
                     {
-                        languages.map( ( item, idx ) => <p className="bg-slate-200 text-center" key={ idx }>{ item}</p>)
+                        languages?.map( ( item, idx ) => <p className="bg-slate-200 text-center" key={ idx }>{ item}</p>)
                     }
                     <p className="font-bold">Specialties:</p>
                     {
-                        specialties.map( ( item, idx ) => <p className="bg-slate-200 text-center" key={ idx }>{ item }</p>)
+                        specialties?.map( ( item, idx ) => <p className="bg-slate-200 text-center" key={ idx }>{ item }</p>)
                     }
                     <div className="card-actions my-3">
-                        <button className="btn text-white w-full bg-[#FE5C24] hover:bg-blue-600">Details</button>
+                        <Link to={`/guide-details/${_id}`}>
+                        <button className="btn text-white w-full bg-[#FE5C24] hover:bg-blue-600">Guide Details</button>
+                        </Link>
                     </div>
                 </div>
             </div>
