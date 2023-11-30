@@ -5,20 +5,20 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-    const { user,singOut } = useAuth();
+    const { user, singOut } = useAuth();
 
     const handleSingout = () => {
-        
+
         singOut()
             .then( () => {
-                Swal.fire({
+                Swal.fire( {
                     position: "top-end",
                     icon: "success",
                     title: "Logout Successfully",
                     showConfirmButton: false,
                     timer: 1500
-                  });
-        })
+                } );
+            } )
     }
     return (
         <>
@@ -34,11 +34,14 @@ const Navbar = () => {
                             <label htmlFor="my-drawer" className="btn md:hidden drawer-button"><FaAlignLeft /> </label>
 
                             <div className="">
-                                <ul className="hidden md:block md:flex justify-between gap-5">
-                                    <li><NavLink to='/'>Home</NavLink></li>
-                                    <li><NavLink to='/community'>Community</NavLink></li>
-                                    <li><NavLink to='/'>Blog</NavLink></li>
-                                    <li><NavLink to='/contact'>Contact</NavLink></li>
+                                <ul className="hidden md:block md:flex justify-between gap-5 font-semibold">
+                                    <li><NavLink to='/' className={ ( { isActive } ) => isActive ? "active" : "text-orange-600" }>Home</NavLink></li>
+
+                                    <li><NavLink to='/community' className={ ( { isActive } ) => isActive ? "active" : "text-orange-600" }>Community</NavLink></li>
+
+                                    <li><NavLink to='/story' className={ ( { isActive } ) => isActive ? "active" : "text-orange-600" }>Blog</NavLink></li>
+
+                                    <li><NavLink to='/contact' className={ ( { isActive } ) => isActive ? "active" : "text-orange-600" }>Contact</NavLink></li>
                                 </ul>
                             </div>
                             {
@@ -57,7 +60,7 @@ const Navbar = () => {
                                                 <p>{ user.displayName }</p><hr />
                                                 <p>{ user.email }</p><hr />
                                                 <NavLink to='/dashboard'>Dashboard</NavLink> <hr />
-                                                <button onClick={handleSingout} className="flex  items-center gap-3 text-red-600">Logout<FaArrowRotateLeft />  </button>
+                                                <button onClick={ handleSingout } className="flex  items-center gap-3 text-red-600">Logout<FaArrowRotateLeft />  </button>
                                             </div>
                                         </div>
                                     </div>

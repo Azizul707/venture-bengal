@@ -13,6 +13,9 @@ import Community from "../pages/community/Community";
 import AllStory from "../pages/Story/AllStory";
 import StoryDetails from "../pages/Story/StoryDetails";
 import GuideDetails from "../pages/Home/GuideDetails";
+import MyProfile from "../Dashboard/UserDashboard/MyProfile";
+import MyBookings from "../Dashboard/UserDashboard/MyBookings";
+import MyWishlist from "../Dashboard/UserDashboard/MyWishlist";
 
 const Routes = createBrowserRouter( [
     {
@@ -67,8 +70,26 @@ const Routes = createBrowserRouter( [
     },
     {
         path: '/dashboard',
-        element:<Dashboard/>
+        element: <Dashboard />,
+        children: [ 
+            {
+                path: 'my-profile',
+                element:<MyProfile/>
+            },
+            {
+                path: 'my-bookings',
+                element:<MyBookings/>
+            },
+            {
+                path: 'my-wishlist',
+                element:<MyWishlist/>
+            },
+        ]
     }
+   
 ] )
 
 export default Routes;
+
+
+

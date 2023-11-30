@@ -34,9 +34,10 @@ const BookingForm = ( { titles } ) => {
             email,
             spotPhoto,
             price,
-            selectedGuide
+            selectedGuide,
+            
         }
-        console.log( bookingInfo );
+        
 
         Swal.fire( {
             title: "Do you Book the Package?",
@@ -56,7 +57,8 @@ const BookingForm = ( { titles } ) => {
                     email:email,
                     spotPhoto:spotPhoto,
                     price:price,
-                    selectedGuide:selectedGuide
+                    selectedGuide: selectedGuide,
+                    status:"In Review"
                 } )
                     .then( res => {
 

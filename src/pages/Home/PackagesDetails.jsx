@@ -2,7 +2,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
-import Slider from "../../components/Slider/Slider";
 import { FaMessage, FaStopwatch, FaTicket, FaTruckPickup } from "react-icons/fa6";
 import BookingForm from "../booking/BookingForm";
 import ImageGallery from "../../components/ImageGallery";

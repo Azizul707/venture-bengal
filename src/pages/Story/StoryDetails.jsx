@@ -2,11 +2,15 @@
 
 import { useParams } from "react-router-dom";
 import useStories from "../../hooks/useStories";
+import { FacebookShareButton, FacebookIcon } from 'react-share';
+import { FaShare } from "react-icons/fa6";
+
 
 const StoryDetails = () => {
     const titles = useParams();
     const [ story ] = useStories();
     const stories = story.filter( item => item.title === titles.title );
+    
     
 
     return (
@@ -48,6 +52,13 @@ const StoryDetails = () => {
                     </div>
                 </div>)
             }
+            <div className="flex justify-center items-center gap-3 my-10">
+                <span className="flex items-center gap-2 border p-2"> Share on <FaShare></FaShare></span>
+                
+            <FacebookShareButton url={`https://your-website.com/story/${story.id}`}>
+            <FacebookIcon className="border p-1" size={40} round />
+          </FacebookShareButton>
+            </div>
        </div>
     );
 };

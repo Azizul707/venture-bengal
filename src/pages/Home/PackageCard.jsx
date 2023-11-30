@@ -2,9 +2,25 @@
 
 import { Link } from "react-router-dom";
 import { FaHeart, FaLocationDot } from "react-icons/fa6";
+import Swal from 'sweetalert2'
+
 
 const PackageCard = ( { item } ) => {
+    
     const { spotPhoto, tourType, tripTitle, price, _id } = item;
+
+
+    const handleWishlist = () => {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Added to Wishlist",
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
+
+
     return (
         <div>
             <div className="card card-compact w-96 bg-base-100 shadow-xl space-y-5">
@@ -23,7 +39,7 @@ const PackageCard = ( { item } ) => {
                     </Link>
                 </div>
                 <div className="absolute left-3">
-                    <button className="bg-white rounded-full p-2 tooltip" data-tip="Wishlist" ><FaHeart className="text-red-500" /></button>
+                    <button onClick={handleWishlist} className="bg-white rounded-full p-2 tooltip" data-tip="Wishlist" ><FaHeart className="text-red-500" /></button>
                 </div>
             </div>
         </div>

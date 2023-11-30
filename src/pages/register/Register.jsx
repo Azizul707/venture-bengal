@@ -8,9 +8,9 @@ import userAxiosSecure from "../../hooks/userAxiosSecure";
 
 const Register = () => {
     const { createUser, updateUserProfile,googleLogin } = useAuth()
+    const axiosSEcure = userAxiosSecure();
 
     const handleCreateUser = ( e ) => {
-        const axiosSEcure = userAxiosSecure();
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -21,6 +21,7 @@ const Register = () => {
         
         createUser( email, password )
             .then( res => {
+              form.reset();
                 console.log( res.user );
             } )
         updateUserProfile( name, photoURL )
@@ -35,7 +36,7 @@ const Register = () => {
                     timer: 1500
                 } );
 
-                axiosSEcure.post( '/users', { email: email, name: name, photoURL: photoURL } )
+                axiosSEcure.post( '/users', { email: email, name: name, photoURL: photoURL, role:"user" } )
                     .then( res => {
                         console.log( res );
                     } )

@@ -4,7 +4,7 @@ import useStories from "../../hooks/useStories";
 const AllStory = () => {
     const [ story ] = useStories();    
     return (
-        <div className="max-w-screen-xl mx-auto grid justify-items-center gap-5 md:grid-cols-2 my-20">
+        <div className="max-w-screen-xl mx-auto grid justify-items-center gap-5 my-20">
         {
             story.map(item=><div key={item._id} className="card card-side bg-base-100 shadow-xl">
             <figure><img className="w-96 h-80" src={item.imageUrl} alt="Movie"/></figure>
