@@ -16,6 +16,7 @@ const Login = () => {
         const password = form.password.value;
         singInUser( email, password )
             .then( res => {
+                navigate( '/' );
                 console.log( res );
                 Swal.fire( {
                     position: "top-end",
@@ -28,12 +29,20 @@ const Login = () => {
             } )
             .catch( err => {
                 console.log( err );
+                Swal.fire( {
+                    position: "top-end",
+                    icon: "error",
+                    title: "Invalid Login Credentials",
+                    showConfirmButton: false,
+                    timer: 1500
+                } );
             } );
     };
 
     const handleGoogleLogin = () => {
         googleLogin()
             .then( res => {
+                navigate( '/' );
                 Swal.fire( {
                     position: "top-end",
                     icon: "success",

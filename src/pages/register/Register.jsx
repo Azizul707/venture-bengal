@@ -7,6 +7,7 @@ import userAxiosSecure from "../../hooks/userAxiosSecure";
 
 
 const Register = () => {
+    const navigate = useNavigate();
     const { createUser, updateUserProfile,googleLogin } = useAuth()
     const axiosSEcure = userAxiosSecure();
 
@@ -21,7 +22,8 @@ const Register = () => {
         
         createUser( email, password )
             .then( res => {
-              form.reset();
+                form.reset();
+                navigate( '/' );
                 console.log( res.user );
             } )
         updateUserProfile( name, photoURL )

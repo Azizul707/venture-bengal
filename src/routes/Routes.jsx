@@ -16,6 +16,9 @@ import GuideDetails from "../pages/Home/GuideDetails";
 import MyProfile from "../Dashboard/UserDashboard/MyProfile";
 import MyBookings from "../Dashboard/UserDashboard/MyBookings";
 import MyWishlist from "../Dashboard/UserDashboard/MyWishlist";
+import ManageUsers from "../Dashboard/Admin/ManageUsers";
+import AddPackage from "../Dashboard/Admin/AddPackage";
+import ManageTours from "../Dashboard/Guide/ManageTours";
 
 const Routes = createBrowserRouter( [
     {
@@ -74,16 +77,28 @@ const Routes = createBrowserRouter( [
         children: [ 
             {
                 path: 'my-profile',
-                element:<MyProfile/>
+                element:<PrivateRoute><MyProfile/></PrivateRoute>
             },
             {
                 path: 'my-bookings',
-                element:<MyBookings/>
+                element:<PrivateRoute><MyBookings/></PrivateRoute>
             },
             {
                 path: 'my-wishlist',
-                element:<MyWishlist/>
+                element:<PrivateRoute><MyWishlist/></PrivateRoute>
             },
+            {
+                path: 'manage-users',
+                element:<PrivateRoute><ManageUsers/></PrivateRoute>
+            },
+            {
+                path: 'add-package',
+                element:<PrivateRoute><AddPackage/></PrivateRoute>
+            },
+            {
+                path: 'manage-tours',
+                element:<PrivateRoute><ManageTours/></PrivateRoute>
+            }
         ]
     }
    
