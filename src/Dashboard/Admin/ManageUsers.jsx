@@ -8,7 +8,7 @@ const ManageUsers = () => {
     const {refetch, isPending, data: users = [] } = useQuery( {
         queryKey: [ 'users' ],
         queryFn: async () => {
-            const res = await axiosSecure.get( '/users',{withCredentials:true} );
+            const res = await axiosSecure.get( '/users' );
             return res.data;
         },
     } );

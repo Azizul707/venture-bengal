@@ -46,30 +46,15 @@ const AuthProvider = ( { children } ) => {
 
     useEffect( () => {
         const unsubscribe = onAuthStateChanged( auth, ( currentUser ) => {
-            const userEmail = currentUser?.email || user?.email;
-            const loggedUser = { email: userEmail }
+            
             setUser( currentUser );
             setLoading( false );
-            if ( currentUser ) {
-                axiosSecure.post( '/jwt', loggedUser, {
-                    withCredentials: true
-                } )
-                    .then( res => {
-                    console.log(res);
-                })
-            } else {
-                axiosSecure.post( '/logout', loggedUser, {
-                    withCredentials: true
-                } )
-                    .then( res => {
-                        console.log( res );
-                    } );
-            }
+            
         } )
         return () => {
             return unsubscribe;
         }
-    }, [ auth ] );
+    }, [ auth ,user?.email,axiosSecure] );
 
     const updateUserProfile = async(name, photo) => {
         return await updateProfile(auth.currentUser, {

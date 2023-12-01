@@ -11,7 +11,7 @@ const MyBookings = () => {
     const { isPending, refetch, data: bookings = [] } = useQuery( {
         queryKey: [ 'bookings' ],
         queryFn: async () => {
-            const res = await axiosPublic.get( `/bookings?email=${ user?.email }`,{withCredentials:true} );
+            const res = await axiosPublic.get( `/bookings?email=${ user?.email }` );
             return res.data;
         },
     } );

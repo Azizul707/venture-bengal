@@ -26,8 +26,8 @@ const BookingForm = ( { titles } ) => {
 
     useEffect( () => {
         const userGuide = users.filter( item => item.role === "guide" );
-        setGuides(userGuide)
-    },[users])
+        setGuides( userGuide )
+    }, [] );
 
 
     const { user } = useAuth();
