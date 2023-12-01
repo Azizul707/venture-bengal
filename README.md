@@ -1,8 +1,11 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+===========================Venture Bengal============================
+
+* This is a Bangladesh based tourist guide website.
+* Here are lots of Package for foreigner travelers.
+* Here are three types of role are implemented an Admin, a user, a guide profile.
+* An user can access all package all his bookings he user can delete his bookings.
+* Admin will manage all package all users in this website. Admin can add new package , can make a normal user to an admin or a guide.
+* Here jwt authentication is implemented so no one can access any ones information.

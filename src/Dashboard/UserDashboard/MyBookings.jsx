@@ -11,7 +11,7 @@ const MyBookings = () => {
     const { isPending, refetch, data: bookings = [] } = useQuery( {
         queryKey: [ 'bookings' ],
         queryFn: async () => {
-            const res = await axiosPublic.get( `/bookings?email=${ user?.email }` );
+            const res = await axiosPublic.get( `/bookings?email=${ user?.email }`,{withCredentials:true} );
             return res.data;
         },
     } );
@@ -19,6 +19,8 @@ const MyBookings = () => {
     if ( isPending ) {
         return 'loading........'
     }
+
+   
 
     const handleDelete = ( id ) => {
         
@@ -81,7 +83,7 @@ const MyBookings = () => {
                                 </th>
                                 <th>
                                     {
-                                        item?.status === "In Review" ? <button disabled className="btn btn-ghost btn-xs  ">Pay</button> : <button className="btn btn-ghost bg-orange-600 hover:bg-blue-600 text-white btn-xs">Pay</button>
+                                        item?.status === "In Review" || item.status == "Rejected" ? <button disabled className="btn btn-ghost btn-xs  ">Pay</button> : <button className="btn btn-ghost bg-orange-600 hover:bg-blue-600 text-white btn-xs">Pay</button>
                                     }
                                 </th>
                                 <th>

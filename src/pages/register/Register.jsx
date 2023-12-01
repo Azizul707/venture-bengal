@@ -2,14 +2,14 @@ import { FaGoogle } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import userAxiosSecure from "../../hooks/userAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 
 const Register = () => {
     const navigate = useNavigate();
     const { createUser, updateUserProfile,googleLogin } = useAuth()
-    const axiosSEcure = userAxiosSecure();
+    const axiosSEcure = useAxiosSecure();
 
     const handleCreateUser = ( e ) => {
         e.preventDefault();

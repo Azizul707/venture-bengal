@@ -81,7 +81,6 @@
 /* eslint-disable no-unused-vars */
 import { NavLink, Outlet } from "react-router-dom";
 import Navbar from "../components/navBar/Navbar";
-import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import useUserRole from "../hooks/useUserRole";
 
@@ -106,7 +105,6 @@ const Dashboard = () => {
         }
     }, [ userRole?.role ] );
     
-    console.log(userRole);
 
     return (
         <div>

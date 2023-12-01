@@ -1,10 +1,10 @@
 import { useState } from "react";
-import userAxiosSecure from "../../hooks/userAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const AddPackage = () => {
 
-    const axiosSecure = userAxiosSecure();
+    const axiosSecure = useAxiosSecure();
 
     const handleAddPackage = ( e ) => {
         e.preventDefault();

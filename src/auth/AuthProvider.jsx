@@ -2,12 +2,15 @@
 import { createContext, useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 export const AuthContext = createContext();
 
 
 const AuthProvider = ( { children } ) => {
+    const axiosSecure = useAxiosSecure();
+
     const [ user, setUser ] = useState( null )
     const [ loading, setLoading ] = useState( true );
     const googleAuth = new GoogleAuthProvider()
@@ -16,14 +19,7 @@ const AuthProvider = ( { children } ) => {
 
 
     
-    const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
-        }).catch((error) => {
-            console.error("Error updating profile:", error);
-        });
-    };
-
+   
     
     // social login
     const googleLogin = () => {
@@ -50,13 +46,39 @@ const AuthProvider = ( { children } ) => {
 
     useEffect( () => {
         const unsubscribe = onAuthStateChanged( auth, ( currentUser ) => {
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: userEmail }
             setUser( currentUser );
             setLoading( false );
+            if ( currentUser ) {
+                axiosSecure.post( '/jwt', loggedUser, {
+                    withCredentials: true
+                } )
+                    .then( res => {
+                    console.log(res);
+                })
+            } else {
+                axiosSecure.post( '/logout', loggedUser, {
+                    withCredentials: true
+                } )
+                    .then( res => {
+                        console.log( res );
+                    } );
+            }
         } )
         return () => {
             return unsubscribe;
         }
-    }, [auth] )
+    }, [ auth ] );
+
+    const updateUserProfile = async(name, photo) => {
+        return await updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        }).catch((error) => {
+            console.error("Error updating profile:", error);
+        });
+    };
+
 
 
 

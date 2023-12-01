@@ -19,6 +19,7 @@ import MyWishlist from "../Dashboard/UserDashboard/MyWishlist";
 import ManageUsers from "../Dashboard/Admin/ManageUsers";
 import AddPackage from "../Dashboard/Admin/AddPackage";
 import ManageTours from "../Dashboard/Guide/ManageTours";
+import ErrorPage from "../components/ErrorPage";
 
 const Routes = createBrowserRouter( [
     {
@@ -68,6 +69,10 @@ const Routes = createBrowserRouter( [
             {
                 path: 'guide-details/:id',
                 element:<PrivateRoute><GuideDetails></GuideDetails></PrivateRoute>
+            },
+            {
+                path: '*',
+                element:<ErrorPage/>
             }
         ]
     },

@@ -2,18 +2,35 @@
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import useGuides from '../../hooks/useGuides';
 import useAuth from '../../hooks/useAuth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import userAxiosSecure from '../../hooks/userAxiosSecure';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const BookingForm = ( { titles } ) => {
+    
+
     const { spotPhoto, tripTitle, price, } = titles;
-    const [ guides ] = useGuides();
+    const axiosSecure = useAxiosSecure();
+
+    const [ guides, setGuides ] = useState( null );
+
+    const {refetch, isPending, data: users = [] } = useQuery( {
+        queryKey: [ 'users' ],
+        queryFn: async () => {
+            const res = await axiosSecure.get( '/users' );
+            return res.data;
+        },
+    } );
+
+    useEffect( () => {
+        const userGuide = users.filter( item => item.role === "guide" );
+        setGuides(userGuide)
+    },[users])
+
 
     const { user } = useAuth();
-    const axiosSecure = userAxiosSecure();
 
     const [ tourDate, setTourDate ] = useState( new Date() );
 
@@ -25,18 +42,9 @@ const BookingForm = ( { titles } ) => {
     const handleBooking = ( e ) => {
         e.preventDefault();
         const form = e.target;
+        const touristName = form.touristName.value;
         const date = tourDate;
         const email = user?.email;
-
-        const bookingInfo = {
-            tripTitle,
-            date,
-            email,
-            spotPhoto,
-            price,
-            selectedGuide,
-            
-        }
         
 
         Swal.fire( {
@@ -58,11 +66,15 @@ const BookingForm = ( { titles } ) => {
                     spotPhoto:spotPhoto,
                     price:price,
                     selectedGuide: selectedGuide,
+                    contact: guides.email,
+                    touristName:touristName,
                     status:"In Review"
                 } )
+                    
                     .then( res => {
+                        refetch();
 
-                        Swal.fire( "Booked!", `${ tripTitle }`, "success" );
+                        Swal.fire( `${ tripTitle }`, "Successfully Booked" );
                     } )
 
             } else if ( result.isDenied ) {
@@ -72,6 +84,7 @@ const BookingForm = ( { titles } ) => {
 
 
     };
+    
 
     return (
         <div className=''>
@@ -88,7 +101,7 @@ const BookingForm = ( { titles } ) => {
                         <label className="label">
                             <span className="label-text">Tourist Name:</span>
                         </label>
-                        <input type="text" placeholder="name" className="input input-bordered" defaultValue={ user?.displayName } readOnly />
+                        <input type="text" placeholder="name" name='touristName' className="input input-bordered" defaultValue={ user?.displayName } readOnly />
                     </div>
                     <div className="form-control">
                         <label className="label">
@@ -116,7 +129,7 @@ const BookingForm = ( { titles } ) => {
                         <select value={ selectedGuide } onChange={ handleGuideChange } >
                             <option defaultValue="defaultValue">Select a guide</option>
                             { guides?.map( ( name, index ) => (
-                                <option key={ index } value={ name?.name }>{ name?.name }</option>
+                                <option key={ index } value={ name?.name.split(" ")[0] }>{ name?.name }</option>
                             ) ) }
                         </select>
                     </div>
@@ -128,7 +141,7 @@ const BookingForm = ( { titles } ) => {
                     </label>
                     <br />
                     <div className="form-control mt-6">
-                        <button type='submit' className="btn bg-orange-600 hover:bg-blue-600 text-white">Booking Now</button>
+                        <button  type='submit' className="btn bg-orange-600 hover:bg-blue-600 text-white">Booking Now</button>
                     </div>
                 </div>
             </form>
